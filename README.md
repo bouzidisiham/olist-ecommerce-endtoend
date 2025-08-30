@@ -64,7 +64,7 @@ Le DAG exécute les étapes suivantes :
 
 <p align="center">
   <img src="docs/images/a1.png" alt="airflow — Aperçu 1" width="50%">
-  <img src="docs/images/22.png" alt="airflow — Aperçu 2" width="50%">
+  <img src="docs/images/a2.png" alt="airflow — Aperçu 2" width="50%">
 </p>
 
 ---
