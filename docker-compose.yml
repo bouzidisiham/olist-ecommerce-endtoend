@@ -1,0 +1,76 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: olist_pg
+    env_file: .env
+    ports:
+      - "${HOST_POSTGRES_PORT:-5433}:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 15
+    restart: unless-stopped
+
+  airflow:
+    image: apache/airflow:2.9.2
+    container_name: olist_airflow
+    depends_on:
+      postgres:
+        condition: service_healthy
+    env_file: .env
+    environment:
+      AIRFLOW__DATABASE__LOAD_DEFAULT_CONNECTIONS: "False"
+      AIRFLOW__CORE__LAZY_LOAD_PLUGINS: "True"
+      AIRFLOW__CORE__EXECUTOR: LocalExecutor
+      AIRFLOW__SCHEDULER__PARSING_PROCESSES: "2"
+      AIRFLOW__SCHEDULER__MIN_FILE_PROCESS_INTERVAL: "5"
+      AIRFLOW__SCHEDULER__DAG_DIR_LIST_INTERVAL: "10"
+      AIRFLOW__WEBSERVER__WORKERS: "2"
+      AIRFLOW__WEBSERVER__WORKER_REFRESH_INTERVAL: "60"
+      AIRFLOW__WEBSERVER__WEB_SERVER_WORKER_TIMEOUT: "120"
+
+      PYTHONPATH: /opt/airflow
+      _PIP_ADDITIONAL_REQUIREMENTS: "-r /opt/airflow/requirements.txt"
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: >-
+        postgresql+psycopg2://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
+
+      # Webserver
+      AIRFLOW__WEBSERVER__WEB_SERVER_HOST: 0.0.0.0
+      AIRFLOW__WEBSERVER__WEB_SERVER_PORT: ${AIRFLOW__WEBSERVER__WEB_SERVER_PORT:-8080}
+      AIRFLOW__CORE__LOAD_EXAMPLES: ${AIRFLOW__CORE__LOAD_EXAMPLES:-False}
+
+    volumes:
+      - ./requirements.txt:/opt/airflow/requirements.txt
+      - ./airflow/dags:/opt/airflow/dags
+      - ./etl:/opt/airflow/etl
+      - ./dbt:/opt/airflow/dbt
+      - ./data:/opt/airflow/data
+
+    ports:
+      - "${HOST_AIRFLOW_PORT:-8080}:${AIRFLOW__WEBSERVER__WEB_SERVER_PORT:-8080}"
+
+
+    command: >
+      bash -c "
+        set -e
+        rm -f /opt/airflow/airflow-webserver.pid /opt/airflow/airflow-scheduler.pid
+        airflow db check || airflow db init
+        airflow webserver --port ${AIRFLOW__WEBSERVER__WEB_SERVER_PORT:-8080} &
+        exec airflow scheduler
+      "
+
+    healthcheck:
+      test: ["CMD-SHELL", "bash -lc '</dev/tcp/127.0.0.1/${AIRFLOW__WEBSERVER__WEB_SERVER_PORT:-8080}' || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 30
+
+    restart: unless-stopped
+
+volumes:
+  pgdata:

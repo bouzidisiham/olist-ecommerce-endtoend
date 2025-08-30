@@ -1,0 +1,83 @@
+# ---------- General OS junk ----------
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ---------- Python ----------
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+.build/
+dist/
+build/
+.eggs/
+*.egg-info/
+.venv/
+venv/
+ENV/
+env/
+pip-wheel-metadata/
+pip-log.txt
+
+# ---------- Jupyter / IPython ----------
+.ipynb_checkpoints/
+
+# ---------- Testing / Coverage / Mypy ----------
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.pytype/
+
+# ---------- Environment / Secrets ----------
+.env
+.env.*
+*.env
+# Keep only example
+!.env.example
+
+# Kaggle credentials (user-specific)
+**/.kaggle/
+kaggle.json
+
+# ---------- Data (local only) ----------
+data/**
+!data/.gitkeep
+
+# ---------- dbt ----------
+dbt/target/
+dbt/logs/
+dbt/packages/
+profiles.yml        # keep local only
+!profiles.yml.example
+
+# ---------- Airflow (local runs) ----------
+airflow/logs/
+airflow/plugins/__pycache__/
+airflow/airflow.db
+airflow/__pycache__/
+
+# SQLite db if someone runs standalone
+*.sqlite3
+
+# ---------- Streamlit ----------
+app/.streamlit/secrets.toml
+
+# ---------- Editors / IDE ----------
+.vscode/
+.idea/
+*.code-workspace
+
+# ---------- Docker ----------
+docker-compose.override.yml
+*.dockerfile.local
+*.pid
+*.log
+*.bak
+
+# ---------- Misc ----------
+*.tmp
+*.swp
+*.lock

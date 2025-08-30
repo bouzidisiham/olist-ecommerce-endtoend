@@ -1,0 +1,15 @@
+# Extra libs (ne perturbe pas Airflow)
+kaggle
+python-dotenv
+
+# dbt (adapter Postgres)
+dbt-core
+dbt-postgres
+
+# Data
+pandas
+psycopg2-binary
+
+# App (dashboard)
+streamlit
+plotly

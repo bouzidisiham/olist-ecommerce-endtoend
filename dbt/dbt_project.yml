@@ -1,0 +1,13 @@
+name: 'olist'
+version: '1.0.0'
+config-version: 2
+profile: 'olist_profile'
+model-paths: ['models']
+seed-paths: ['seeds']
+models:
+  olist:
+    +materialized: view
+    staging:
+      +schema: stg
+    marts:
+      +schema: mart
