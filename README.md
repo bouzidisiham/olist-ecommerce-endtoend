@@ -4,17 +4,21 @@
 
 Mettre en place une pipeline analytique de bout en bout sur le dataset **Olist Brazilian E-commerce** :
 
-- **Période couverte** : 2016 à 2018 
-- **Volume** : environ 100 000 commandes 
-- **Source** : Olist, la plus grande place de marché brésilienne, connectant des petites entreprises à différents canaux de vente. 
-- **Objectif** : analyser la performance des ventes, des livraisons et la satisfaction client.
-
 - Ingestion des CSV Kaggle → PostgreSQL (`raw.*`)  
 - Transformation en modèle analytique via **dbt** (`staging.*`, `mart.*`)  
 - Orchestration avec **Apache Airflow**  
 - Visualisation des KPI avec une app **Streamlit**  
 
+---
 
+## Dataset
+
+**Olist Brazilian E-commerce** :
+
+- **Période couverte** : 2016 à 2018 
+- **Volume** : environ 100 000 commandes 
+- **Source** : Olist, la plus grande place de marché brésilienne, connectant des petites entreprises à différents canaux de vente. 
+- **Objectif** : analyser la performance des ventes, des livraisons et la satisfaction client.
 
 ---
 
