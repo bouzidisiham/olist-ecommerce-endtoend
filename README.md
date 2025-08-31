@@ -13,7 +13,7 @@ Mettre en place une pipeline analytique de bout en bout sur le dataset **Olist B
 
 ## Dataset
 
-**Olist Brazilian E-commerce** :
+Dataset **Olist Brazilian E-commerce** :
 
 - **Période couverte** : 2016 à 2018 
 - **Volume** : environ 100 000 commandes 
