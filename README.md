@@ -9,7 +9,6 @@ Mettre en place une pipeline analytique de bout en bout sur le dataset **Olist B
 - Orchestration avec **Apache Airflow**  
 - Visualisation des KPI avec une app **Streamlit**  
 
----
 
 ## Dataset
 
@@ -20,7 +19,6 @@ Dataset **Olist Brazilian E-commerce** :
 - **Source** : Olist, la plus grande place de marché brésilienne, connectant des petites entreprises à différents canaux de vente. 
 - **Objectif** : analyser la performance des ventes, des livraisons et la satisfaction client.
 
----
 
 ## Stack utilisée
 
@@ -31,7 +29,6 @@ Dataset **Olist Brazilian E-commerce** :
 - Streamlit + Plotly : dashboard interactif  
 - Docker Compose : orchestration des services  
 
----
 
 ## 1. Pré-requis
 
@@ -46,7 +43,6 @@ Avant de lancer le projet, assurez-vous d’avoir installé :
    docker --version
    docker compose version
 
----
 
 ## 2. Lancer l’infrastructure
 
@@ -60,7 +56,6 @@ docker compose up -d --build
 - Airflow Web UI sera disponible sur [http://localhost:8080](http://localhost:8080).  
  
 
----
 
 ## 3. Créer un utilisateur Airflow (admin)
 
@@ -73,7 +68,6 @@ docker exec -it olist_airflow bash -lc   'airflow users create     --username ${
 Par défaut (variables `.env`) :  
 - Login : `admin`  
 - Password : `adminpwd`  
----
 
 ## 4. Orchestration avec Airflow
 
@@ -93,9 +87,7 @@ Le DAG exécute les étapes suivantes :
   <img src="docs/images/a2.png" alt="airflow — Aperçu 2" width="50%">
 </p>
 
----
 
----
 
 ## 5. Lancer l’application Streamlit
 
@@ -118,7 +110,6 @@ Fonctionnalités incluses :
   <img src="docs/images/d2.png" alt="Dashboard — Aperçu 2" width="50%">
 </p>
 
----
 
 ## 6. Structure du projet
 
@@ -134,7 +125,6 @@ olist-ecommerce-endtoend/
 └─ .env
 ```
 
----
 
 ## Crédits
 
