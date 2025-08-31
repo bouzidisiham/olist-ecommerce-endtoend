@@ -11,7 +11,7 @@ Mettre en place une pipeline analytique de bout en bout sur le dataset **Olist B
 
 ---
 
-## 1. Stack utilisée
+## Stack utilisée
 
 - Python 3.10+ : Pandas, SQLAlchemy, psycopg2, dotenv  
 - PostgreSQL 15 : entrepôt de données  
@@ -19,6 +19,21 @@ Mettre en place une pipeline analytique de bout en bout sur le dataset **Olist B
 - Apache Airflow 2.9 : orchestration des workflows  
 - Streamlit + Plotly : dashboard interactif  
 - Docker Compose : orchestration des services  
+
+---
+
+## 1. Pré-requis
+
+Avant de lancer le projet, assurez-vous d’avoir installé :
+
+1. **Docker Desktop** (Windows/Mac) ou **Docker Engine** (Linux)  
+   [Télécharger Docker](https://docs.docker.com/get-docker/)
+
+2. **Docker Compose v2** (inclus dans Docker Desktop récent)  
+   Vérifiez avec :
+   ```bash
+   docker --version
+   docker compose version
 
 ---
 
